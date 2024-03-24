@@ -1,9 +1,29 @@
+import {
+  generateAlphabet,
+  getRandomCharsWithElement,
+  getRandomElement,
+} from "../../data/utils";
 import Button from "../Button/Button";
+import CharButton from "../CharButton/CharButton";
+import CharButtonsGroup from "../CharButtonsGroup/CharButtonsGroup";
+import LoadingBar from "../LoadingBar/LoadingBar";
+import MainChar from "../MainChar/MainChar";
 
 export default function SingleGame() {
+  const englishUppercaseLetters = generateAlphabet(0x0410, 0x042f);
+  const selected = getRandomElement(englishUppercaseLetters);
+  const options = getRandomCharsWithElement(selected, englishUppercaseLetters);
   return (
     <div className="border border-blue-500 p-2 m-5 rounded-lg">
-      <div className="h-[340px] bg-blue-400">Heading image</div>
+      <div className="flex items-center justify-center">
+        <MainChar char={selected} />
+      </div>
+      <LoadingBar />
+      <CharButtonsGroup>
+        {options.map((option) => {
+          return <CharButton key={option} value={option} />;
+        })}
+      </CharButtonsGroup>
       <div>
         <div>Logo</div>
         <h1>You are playing Jackpot 1</h1>
