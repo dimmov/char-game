@@ -19,6 +19,11 @@ export default function SingleGame() {
   );
   const selected = getRandomElement(uppercaseLetters);
   const options = getRandomCharsWithElement(selected, uppercaseLetters);
+
+  if (!currentGame) {
+    return <div>No Game selected</div>;
+  }
+
   return (
     <div className="border border-blue-500 p-2 m-5 rounded-lg">
       <div className="flex items-center justify-center">
