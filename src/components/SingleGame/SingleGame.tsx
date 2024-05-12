@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   generateAlphabet,
   getRandomCharsWithElement,
@@ -8,11 +9,16 @@ import CharButton from "../CharButton/CharButton";
 import CharButtonsGroup from "../CharButtonsGroup/CharButtonsGroup";
 import LoadingBar from "../LoadingBar/LoadingBar";
 import MainChar from "../MainChar/MainChar";
+import { GamesContext } from "../../store/games-context";
 
 export default function SingleGame() {
-  const englishUppercaseLetters = generateAlphabet(0x0410, 0x042f);
-  const selected = getRandomElement(englishUppercaseLetters);
-  const options = getRandomCharsWithElement(selected, englishUppercaseLetters);
+  const { currentGame } = useContext(GamesContext);
+  const uppercaseLetters = generateAlphabet(
+    currentGame?.upperCase.start ?? 0,
+    currentGame?.upperCase.end ?? 0
+  );
+  const selected = getRandomElement(uppercaseLetters);
+  const options = getRandomCharsWithElement(selected, uppercaseLetters);
   return (
     <div className="border border-blue-500 p-2 m-5 rounded-lg">
       <div className="flex items-center justify-center">

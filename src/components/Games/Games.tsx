@@ -1,19 +1,12 @@
 import { useContext } from "react";
 import { GamesContext } from "../../store/games-context";
 import GameCard from "../GameCard/GameCard";
-import { UsersContext } from "../../store/users-context";
-import { getRandomUserId } from "../../data/utils";
 
 export default function Games() {
-  const { games } = useContext(GamesContext);
-  const { users } = useContext(UsersContext);
+  const { games, setCurrentGame } = useContext(GamesContext);
 
-  function startGame(gameId: string) {
-    const currentGame = games.find((game) => game.id === gameId);
-    const userIDs = users.map((user) => user.id);
-    const randomUserId = getRandomUserId(userIDs);
-    const user = users.find((user) => user.id === randomUserId);
-    console.log(user?.firstName + " won " + currentGame?.name);
+  function startGameHandler(gameId: string) {
+    setCurrentGame(gameId);
   }
   return (
     <>
@@ -22,7 +15,7 @@ export default function Games() {
       </div>
       <ul>
         {games.map((game) => (
-          <GameCard key={game.id} game={game} onStartGame={startGame} />
+          <GameCard key={game.id} game={game} onStartGame={startGameHandler} />
         ))}
       </ul>
     </>

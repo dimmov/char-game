@@ -8,7 +8,7 @@ export default function useGamesData() {
   const [error, setError] = useState<string>("");
   const [games, setGames] = useState<SingleGame[]>([]);
 
-  const loadBoards = async () => {
+  const loadGames = async () => {
     try {
       const allGames = await fetchGames();
       setGames(allGames.items);
@@ -20,7 +20,7 @@ export default function useGamesData() {
   };
 
   useEffect(() => {
-    loadBoards();
+    loadGames();
   }, []);
 
   return {

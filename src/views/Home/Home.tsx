@@ -12,9 +12,9 @@ export default function Home() {
         <Heading />
         <GamesContextProvider>
           <Games />
+          <SingleGame />
         </GamesContextProvider>
       </UsersContextProvider>
-      <SingleGame />
       <Footer />
     </>
   );
